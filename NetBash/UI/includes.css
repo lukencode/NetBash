@@ -1,0 +1,71 @@
+﻿
+#netbash-wrap
+{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    width:45%;
+    height:25px;
+    background:rgba(0,0,0, 0.6);
+    color:#00ff00;
+    font-family: 'Consolas', 'Lucida Console', 'Courier New', monospace !important;
+}
+        
+#console-input
+{
+    overflow:hidden;
+    position:absolute;
+    bottom:0;
+    width:100%;
+    background:rgba(0,0,0, 0.2);
+    font-size:14px;
+}
+        
+#console-input span
+{
+    float:left;
+    font-weight:bold;
+    padding:0 3px 0 5px;
+    line-height:23px;
+    color:#fff;
+}
+        
+#console-input input
+{
+    width:94%;
+    background-color:transparent;
+    border:0;
+    height:100%;
+    color:#00ff00;
+    outline:none;
+}
+        
+#console-result
+{
+    display:none;
+    padding:10px;
+    font-size:13px;
+}
+        
+.console-response
+{
+    padding-bottom:5px;
+}
+        
+pre.console-response
+{
+    padding:0 0 5px 0;
+    margin:0;   
+}
+        
+.console-request
+{
+    padding-bottom:2px;
+    color:#fff;
+}
+        
+.console-request a
+{
+    color:Blue;
+    text-decoration:underline;
+}

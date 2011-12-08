@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBash", "NetBash.csproj", "{AD552539-66F6-4FA2-8763-D76893A6DF69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBash.Sample", "..\NetBash.Sample\NetBash.Sample.csproj", "{774201D2-F1BA-4595-9828-204A5390395A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD552539-66F6-4FA2-8763-D76893A6DF69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD552539-66F6-4FA2-8763-D76893A6DF69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD552539-66F6-4FA2-8763-D76893A6DF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD552539-66F6-4FA2-8763-D76893A6DF69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{774201D2-F1BA-4595-9828-204A5390395A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{774201D2-F1BA-4595-9828-204A5390395A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{774201D2-F1BA-4595-9828-204A5390395A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{774201D2-F1BA-4595-9828-204A5390395A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
