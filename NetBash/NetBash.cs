@@ -55,6 +55,8 @@ namespace NetBash
         {
             var sb = new StringBuilder();
 
+            sb.AppendLine("CLEAR - Clears current console window");
+
             foreach (var t in _commandTypes)
             {
                 var attr = (WebCommandAttribute)t.GetCustomAttributes(_attributeType, false).FirstOrDefault();
