@@ -38,6 +38,7 @@
     height:100%;
     color:#00ff00;
     outline:none;
+    font-family: 'Consolas', 'Lucida Console', 'Courier New', monospace !important;
 }
         
 #console-result
@@ -52,6 +53,12 @@
     padding-bottom:5px;
 }
         
+.console-message
+{
+    color:#999;
+    padding-bottom:5px;
+}
+
 pre.console-response
 {
     padding:0 0 5px 0;

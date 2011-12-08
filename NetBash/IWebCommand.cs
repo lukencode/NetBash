@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NetBash
 {
-    interface IWebCommand
+    public interface IWebCommand
     {
         string Process(string commandText);
     }

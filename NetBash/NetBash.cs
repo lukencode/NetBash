@@ -35,6 +35,9 @@ namespace NetBash
             var split = commandText.Split(' ');
             var command = (split.FirstOrDefault() ?? commandText).ToLower();
 
+            if (command == "help")
+                return renderHelp();
+
             var commandType = (from c in _commandTypes
                               let attr = (WebCommandAttribute)c.GetCustomAttributes(_attributeType, false).FirstOrDefault()
                               where attr != null
@@ -46,6 +49,23 @@ namespace NetBash
 
             var webCommand = (IWebCommand)Activator.CreateInstance(commandType);
             return webCommand.Process(string.Join(" ", split.Skip(1)));
+        }
+
+        private string renderHelp()
+        {
+            var sb = new StringBuilder();
+
+            foreach (var t in _commandTypes)
+            {
+                var attr = (WebCommandAttribute)t.GetCustomAttributes(_attributeType, false).FirstOrDefault();
+
+                if(attr == null)
+                    continue;
+
+                sb.AppendLine(string.Format("{0} - {1}", attr.Name.ToUpper(), attr.Description));
+            }
+
+            return sb.ToString();
         }
 
         public static IHtmlString RenderIncludes()
