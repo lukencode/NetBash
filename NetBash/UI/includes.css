@@ -46,9 +46,20 @@
     display:none;
     padding:10px;
     font-size:13px;
-    height:430px;
+    height:455px;
     overflow:auto;
 }
+
+#console-result::-webkit-scrollbar 
+{  
+    height: 1ex;  
+     -webkit-border-radius: 1ex;  
+}  
+  
+#console-result::-webkit-scrollbar-thumb 
+{  
+    background: rgba(255, 255, 255, .2);   
+} 
         
 .console-response
 {

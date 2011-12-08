@@ -7,6 +7,10 @@
         $('<div class="console-response error"/>').html(message).appendTo('#console-result');
     };
 
+    this.scrollBottom = function () {
+        $("#console-result").prop({ scrollTop: $("#console-result").prop("scrollHeight") });
+    };
+
     this.sendCommand = function (text) {
         //update ui, todo only if not expanded
         $("#netbash-wrap").animate({
@@ -27,6 +31,7 @@
                 url: '/netbash',
                 dataType: 'json',
                 data: { Command: text },
+
                 success: function (data) {
                     if (data.Success) {
                         if (data.IsRaw) {
@@ -39,9 +44,13 @@
                     } else {
                         setError(data.Content);
                     }
+
+                    scrollBottom();
                 },
+
                 error: function (xhr, ajaxOptions, thrownError) {
                     setError(thrownError.toString());
+                    scrollBottom();
                 }
             });
         }
