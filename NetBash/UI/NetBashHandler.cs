@@ -123,7 +123,17 @@ namespace NetBash.UI
 
             var response = new { Success = success, IsRaw = true, Content = commandResponse };
 
+            //stop cache
             context.Response.ContentType = "application/json";
+            context.Response.ExpiresAbsolute = DateTime.Now;
+            context.Response.Expires = -1441;
+            context.Response.CacheControl = "no-cache";
+            context.Response.AddHeader("Pragma", "no-cache");
+            context.Response.AddHeader("Pragma", "no-store");
+            context.Response.AddHeader("cache-control", "no-cache");
+            context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            context.Response.Cache.SetNoServerCaching();
+
             return JsonConvert.SerializeObject(response);
         }
 

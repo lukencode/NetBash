@@ -1,6 +1,8 @@
 ﻿
 (function ($, window) {
 
+    var lastCommand;
+
     this.setError = function (message) {
         $('<div class="console-response error"/>').html(message).appendTo('#console-result');
     };
@@ -54,13 +56,17 @@
         initUI();
 
         //enter press
-        $("#console-input input").keypress(function (event) {
+        $("#console-input input").keyup(function (event) {
             if (event.which == 13) {
                 event.preventDefault();
+
                 var text = $("#console-input input").val();
+                lastCommand = text;
 
                 if (text.length)
                     sendCommand(text);
+            } else if (event.which == 38) {
+                $("#console-input input").val(lastCommand);
             }
         });
 

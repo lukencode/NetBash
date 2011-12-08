@@ -46,6 +46,8 @@
     display:none;
     padding:10px;
     font-size:13px;
+    height:430px;
+    overflow:auto;
 }
         
 .console-response

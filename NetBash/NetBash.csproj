@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\EchoCommand.cs" />
+    <Compile Include="Commands\ServerCommand.cs" />
+    <Compile Include="Commands\TimeCommand.cs" />
+    <Compile Include="Commands\UpTimeCommand.cs" />
     <Compile Include="IWebCommand.cs" />
     <Compile Include="NetBash.cs" />
     <Compile Include="NetBash.Settings.cs" />
