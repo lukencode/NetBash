@@ -14,6 +14,9 @@ namespace NetBash.UI
     {
         internal static HtmlString RenderIncludes()
         {
+            if (NetBash.Settings.Authorize != null && !NetBash.Settings.Authorize(HttpContext.Current.Request))
+                return new HtmlString(""); //not authorized dont render
+
             const string format =
 @"<link rel=""stylesheet"" type=""text/css"" href=""{0}netbash-includes.css?v={1}"">
 <script type=""text/javascript"">
@@ -108,6 +111,9 @@ namespace NetBash.UI
 
         private static string RenderCommand(HttpContext context)
         {
+            if (NetBash.Settings.Authorize != null && !NetBash.Settings.Authorize(HttpContext.Current.Request))
+                throw new UnauthorizedAccessException();
+
             var commandResponse = "";
             var success = true;
 
@@ -115,25 +121,15 @@ namespace NetBash.UI
             {
                 commandResponse = NetBash.Current.Process(context.Request.Params["Command"]);
             }
-            catch (Exception argNull)
+            catch (Exception ex)
             {
                 success = false;
-                commandResponse = argNull.Message;
+                commandResponse = ex.Message;
             }
 
             var response = new { Success = success, IsRaw = true, Content = commandResponse };
 
-            //stop cache
             context.Response.ContentType = "application/json";
-            context.Response.ExpiresAbsolute = DateTime.Now;
-            context.Response.Expires = -1441;
-            context.Response.CacheControl = "no-cache";
-            context.Response.AddHeader("Pragma", "no-cache");
-            context.Response.AddHeader("Pragma", "no-store");
-            context.Response.AddHeader("cache-control", "no-cache");
-            context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            context.Response.Cache.SetNoServerCaching();
-
             return JsonConvert.SerializeObject(response);
         }
 

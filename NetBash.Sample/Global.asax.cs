@@ -37,6 +37,10 @@ namespace NetBash.Sample
             RegisterRoutes(RouteTable.Routes);
 
             NetBash.Current.Init();
+            NetBash.Settings.Authorize = (request) =>
+                {
+                    return request.IsLocal;
+                };
         }
     }
 }

@@ -21,6 +21,7 @@
         $("#console-input input").val("");
 
         $('<div class="console-request"/>').html(text).appendTo('#console-result');
+        scrollBottom();
 
         //clear command
         if (text == "clear") {

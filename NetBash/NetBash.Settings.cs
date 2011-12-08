@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using System.Web;
 
 namespace NetBash
 {
@@ -15,6 +16,7 @@ namespace NetBash
         {
             public static string RouteBasePath { get; set; }
             public static string Version { get; private set; }
+            public static Func<HttpRequest, bool> Authorize { get; set; }
 
             static Settings()
             {
