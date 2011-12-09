@@ -146,6 +146,9 @@ namespace NetBash.UI
                 case ".css":
                     response.ContentType = "text/css";
                     break;
+                case ".gif":
+                    response.ContentType = "image/gif";
+                    break;
                 default:
                     return NotFound(context);
             }

@@ -3,6 +3,7 @@
 
     var lastCommand;
     var storageKey = "NetBash-History";
+    var isOpen = false;
 
     var hasLocalStorage = function () {
         try {
@@ -36,13 +37,32 @@
         $("#console-result").prop({ scrollTop: $("#console-result").prop("scrollHeight") });
     };
 
-    this.sendCommand = function (text) {
-        //update ui, todo only if not expanded
-        $("#netbash-wrap").animate({
-            height: '500px'
-        }, 100);
+    this.openConsole = function () {
+        if (isOpen)
+            return;
 
         $("#console-result").fadeIn("fast");
+        $("#netbash-wrap").animate({
+            height: '500px'
+        }, 100, function () {
+            isOpen = true;
+        });
+    };
+
+    this.closeConsole = function () {
+        if (!isOpen)
+            return;
+
+        $("#console-result").fadeOut("fast");
+        $("#netbash-wrap").animate({
+            height: '25px'
+        }, 100, function () {
+            isOpen = false;
+        });
+    };
+
+    this.sendCommand = function (text) {
+        openConsole();
         $("#console-input input").val("");
 
         $('<div class="console-request"/>').html(text).appendTo('#console-result');
@@ -112,10 +132,7 @@
         //close
         $('html').click(function (event) {
             if (!$(event.target).closest('#netbash-wrap').length) {
-                $("#console-result").fadeOut("fast");
-                $("#netbash-wrap").animate({
-                    height: '25px'
-                }, 100);
+                closeConsole();
             };
         });
     });
