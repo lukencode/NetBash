@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Routing;
-using System.Web;
 using System.IO;
-using Newtonsoft.Json;
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Web;
+using System.Web.Routing;
+using Newtonsoft.Json;
 
 namespace NetBash.UI
 {
@@ -18,14 +17,14 @@ namespace NetBash.UI
                 return new HtmlString(""); //not authorized dont render
 
             const string format =
-@"<link rel=""stylesheet"" type=""text/css"" href=""{0}netbash-includes.css?v={1}"">
+@"<link rel=""stylesheet"" type=""text/css"" href=""{0}netbash-style-css?v={1}"">
 <script type=""text/javascript"">
-    if (!window.jQuery) document.write(unescape(""%3Cscript src='{0}netbash-jquery.js' type='text/javascript'%3E%3C/script%3E""));
+    if (!window.jQuery) document.write(unescape(""%3Cscript src='{0}netbash-jquery-js' type='text/javascript'%3E%3C/script%3E""));
 </script>
-<script type=""text/javascript"" src=""{0}netbash-includes.js?v={1}""></script>";
+<script type=""text/javascript"" src=""{0}netbash-script-js?v={1}""></script>";
 
             var result = "";
-            result = string.Format(format, ensureTrailingSlash(VirtualPathUtility.ToAbsolute(NetBash.Settings.RouteBasePath)), NetBash.Settings.Version); 
+            result = string.Format(format, ensureTrailingSlash(VirtualPathUtility.ToAbsolute(NetBash.Settings.RouteBasePath)), NetBash.Settings.Version);
 
             return new HtmlString(result);
         }
@@ -35,9 +34,9 @@ namespace NetBash.UI
             var urls = new[] 
             {  
                 "netbash",
-                "netbash-jquery.js",
-                "netbash-includes.js",
-                "netbash-includes.css"
+                "netbash-jquery-js",
+                "netbash-style-css",
+                "netbash-script-js"
             };
 
             var routes = RouteTable.Routes;
@@ -66,9 +65,6 @@ namespace NetBash.UI
             return Regex.Replace(input, "/+$", "") + "/";
         }
 
-        /// <summary>
-        /// Returns this <see cref="MiniProfilerHandler"/> to handle <paramref name="requestContext"/>.
-        /// </summary>
         public IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
             return this; // elegant? I THINK SO.
@@ -92,8 +88,9 @@ namespace NetBash.UI
 
             switch (Path.GetFileNameWithoutExtension(path).ToLower())
             {
-                case "netbash-jquery":
-                case "netbash-includes":
+                case "netbash-jquery-js":
+                case "netbash-script-js":
+                case "netbash-style-css":
                     output = Includes(context, path);
                     break;
 
@@ -139,8 +136,9 @@ namespace NetBash.UI
         private static string Includes(HttpContext context, string path)
         {
             var response = context.Response;
+            var extension = "." + path.Split('-').LastOrDefault();
 
-            switch (Path.GetExtension(path))
+            switch (extension)
             {
                 case ".js":
                     response.ContentType = "application/javascript";
@@ -157,7 +155,7 @@ namespace NetBash.UI
             cache.SetExpires(DateTime.Now.AddDays(7));
             cache.SetValidUntilExpires(true);
 
-            var embeddedFile = Path.GetFileName(path).Replace("netbash-", "");
+            var embeddedFile = Path.GetFileName(path).Replace("netbash-", "") + extension;
             return GetResource(embeddedFile);
         }
 

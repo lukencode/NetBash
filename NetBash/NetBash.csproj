@@ -38,7 +38,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyLocator.cs" />
     <Compile Include="Commands\ServerCommand.cs" />
     <Compile Include="Commands\TimeCommand.cs" />
     <Compile Include="Commands\UpTimeCommand.cs" />
@@ -57,16 +57,16 @@
     <Compile Include="WebCommandAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="UI\includes.js" />
+    <EmbeddedResource Include="UI\script-js.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="UI\includes.css" />
+    <EmbeddedResource Include="UI\style-css.css" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="UI\jquery.js" />
+    <EmbeddedResource Include="UI\jquery-js.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,6 +5,8 @@ using System.Text;
 using System.Web.Routing;
 using System.Web;
 using NetBash.UI;
+using System.Reflection;
+using System.Web.Compilation;
 
 namespace NetBash
 {
@@ -17,18 +19,38 @@ namespace NetBash
         public void Init()
         {
             NetBashHandler.RegisterRoutes();
+        }
 
-            _interfaceType = typeof(IWebCommand);
-            var results = from a in AppDomain.CurrentDomain.GetAssemblies().ToList()
-                          from t in a.GetTypes()
-                          where _interfaceType.IsAssignableFrom(t)
-                          select t;
+        private void getTypes()
+        {
+            try
+            {
+                _interfaceType = typeof(IWebCommand);
+                var assemblies = AssemblyLocator.GetAssemblies();
 
-            _commandTypes = results.ToList();
+                var results = from a in assemblies
+                              from t in a.GetTypes()
+                              where _interfaceType.IsAssignableFrom(t)
+                              select t;
+
+                _commandTypes = results.ToList();
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                var text = string.Join(", ", ex.LoaderExceptions.Select(e => e.Message));
+                throw new ApplicationException(text);
+            }
+
+            //if we still cant find any throw exception
+            if (_commandTypes == null || !_commandTypes.Any())
+                throw new ApplicationException("No commands found");
         }
 
         public string Process(string commandText)
         {
+            if (_commandTypes == null || !_commandTypes.Any())
+                getTypes();
+
             if (string.IsNullOrWhiteSpace(commandText))
                 throw new ArgumentNullException("Command text cannot be empty");
 
