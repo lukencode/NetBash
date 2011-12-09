@@ -21,7 +21,7 @@ namespace NetBash
             NetBashHandler.RegisterRoutes();
         }
 
-        private void getTypes()
+        internal void LoadCommands()
         {
             try
             {
@@ -49,7 +49,7 @@ namespace NetBash
         public string Process(string commandText)
         {
             if (_commandTypes == null || !_commandTypes.Any())
-                getTypes();
+                LoadCommands();
 
             if (string.IsNullOrWhiteSpace(commandText))
                 throw new ArgumentNullException("Command text cannot be empty");
@@ -77,7 +77,7 @@ namespace NetBash
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("CLEAR - Clears current console window");
+            sb.AppendLine("CLEAR           - Clears current console window");
 
             foreach (var t in _commandTypes)
             {
@@ -86,7 +86,7 @@ namespace NetBash
                 if(attr == null)
                     continue;
 
-                sb.AppendLine(string.Format("{0} - {1}", attr.Name.ToUpper(), attr.Description));
+                sb.AppendLine(string.Format("{0} - {1}", attr.Name.ToUpper().PadRight(15, ' '), attr.Description));
             }
 
             return sb.ToString();

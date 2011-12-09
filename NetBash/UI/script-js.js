@@ -2,6 +2,31 @@
 (function ($, window) {
 
     var lastCommand;
+    var storageKey = "NetBash-History";
+
+    var hasLocalStorage = function () {
+        try {
+            return 'localStorage' in window && window['localStorage'] !== null;
+        } catch (e) {
+            return false;
+        }
+    };
+
+    var save = function () {
+        if (!hasLocalStorage()) { return; }
+        localStorage[storageKey] = $("#console-result").html();
+    };
+
+    var load = function () {
+        if (!hasLocalStorage()) { return; }
+        var html = localStorage[storageKey];
+        $("#console-result").html(html);
+    };
+
+    var clearStorage = function () {
+        if (!hasLocalStorage()) { return; }
+        localStorage[storageKey] = null;
+    };
 
     this.setError = function (message) {
         $('<div class="console-response error"/>').html(message).appendTo('#console-result');
@@ -26,6 +51,7 @@
         //clear command
         if (text == "clear") {
             $("#console-result").html("");
+            clearStorage();
         } else {
             //send command
             $.ajax({
@@ -47,11 +73,13 @@
                     }
 
                     scrollBottom();
+                    save();
                 },
 
                 error: function (xhr, ajaxOptions, thrownError) {
                     setError(thrownError.toString());
                     scrollBottom();
+                    save();
                 }
             });
         }
@@ -64,6 +92,7 @@
 
     $(function () {
         initUI();
+        load();
 
         //enter press
         $("#console-input input").keyup(function (event) {
