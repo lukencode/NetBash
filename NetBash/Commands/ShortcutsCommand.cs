@@ -17,6 +17,8 @@ namespace NetBash.Commands
             sb.AppendFormat("{0} - {1}", "esc".PadRight(7), "Closes NetBash");
             sb.AppendLine();
             sb.AppendFormat("{0} - {1}", "↑".PadRight(7), "Puts last command in text box (only when focuses)");
+            sb.AppendLine();
+            sb.AppendFormat("{0} - {1}", "shift+`".PadRight(7), "Toggle Netbash");
 
             return sb.ToString();
         }

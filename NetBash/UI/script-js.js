@@ -153,6 +153,10 @@
                 $("#console-input input").val(lastCommand);
             } else if (event.which == 27) { // || event.which == 192) { //escape or `
                 closeConsole();
+            } else if (event.which == 192 && $("#console-input input").val().indexOf("~") != -1) {
+                closeConsole();
+                toggleConsole();
+                $("#console-input input").val("");
             }
         });
 
