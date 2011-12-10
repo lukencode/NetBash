@@ -4,6 +4,7 @@
     var lastCommand;
     var storageKey = "NetBash-History";
     var isOpen = false;
+    var showLoader;
 
     var hasLocalStorage = function () {
         try {
@@ -34,6 +35,10 @@
     };
 
     this.scrollBottom = function () {
+        //finish loading
+        clearTimeout(showLoader);
+        $("#console-input").removeClass("loading"); 
+
         $("#console-result").prop({ scrollTop: $("#console-result").prop("scrollHeight") });
     };
 
@@ -61,12 +66,18 @@
         });
     };
 
+    this.startLoader = function () {
+        showLoader = setTimeout("$('#console-input').addClass('loading')", 300);
+    };
+
     this.sendCommand = function (text) {
         openConsole();
         $("#console-input input").val("");
 
         $('<div class="console-request"/>').html(text).appendTo('#console-result');
         scrollBottom();
+
+        startLoader();
 
         //clear command
         if (text == "clear") {

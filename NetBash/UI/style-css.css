@@ -20,6 +20,19 @@
     background:rgba(0,0,0, 0.2);
     font-size:14px;
 }
+
+#console-input.loading
+{ 
+    background-repeat: no-repeat;
+    background-image: url(data:image/gif;base64,R0lGODlhKwALAMIAAP///3ysLL7Vl3ysLP///////////////yH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJDwADACwAAAAAKwALAAADNDiyzPNQtRbhpHfWTCP/mgduYEl+Z8mlGauG1ii+7bzadBejeL64sIfvAtQJR7yioHJsJQAAIfkECQ8AAQAsAAAAACsACwAAAz8Ys8zxMIhJaYQ1q8bHzeAHVh0njtOJlo06uiDrRKhF14K8wNpd6x4fikfSEW0YHPCYEo6WzlBUI7s8albJMAEAIfkECQ8AAQAsAAAAACsACwAAAz8YsszxMIxJaYQtq6xj/dPFjaRwgZ9YrsuJWhHLuu+gyiT93jino7xe4wcKCluemi127ECUS8xqM7o8alaqLwEAIfkEAQ8AAQAsAAAAACsACwAAA0IYsszxULUW4bgYy0kjn1UmXl8HlU40iuhStUK4YvDbyvNQe7ea671T8PEDomxHX24nTFp+zEc0UNxwKtISljoLJAAAOw==);
+    background-size: 13px 7px;
+    background-position:3px center;   
+}
+
+#console-input.loading span
+{
+    visibility:hidden;  
+}
         
 #console-input span
 {
@@ -27,8 +40,7 @@
     font-weight:bold;
     padding:0 3px 0 5px;
     line-height:23px;
-    color:#fff;
-    
+    color:#fff;    
 }
         
 #console-input input
