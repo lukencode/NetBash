@@ -77,13 +77,13 @@
         $('<div class="console-request"/>').html(text).appendTo('#console-result');
         scrollBottom();
 
-        startLoader();
-
         //clear command
         if (text == "clear") {
             $("#console-result").html("");
             clearStorage();
         } else {
+            startLoader();
+
             //send command
             $.ajax({
                 url: '/netbash',
