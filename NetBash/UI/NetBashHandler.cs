@@ -20,6 +20,7 @@ namespace NetBash.UI
 @"<link rel=""stylesheet"" type=""text/css"" href=""{0}netbash-style-css?v={1}"">
 <script type=""text/javascript"">
     if (!window.jQuery) document.write(unescape(""%3Cscript src='{0}netbash-jquery-js' type='text/javascript'%3E%3C/script%3E""));
+    if(!window.key) document.write(unescape(""%3Cscript src='{0}netbash-keymaster-js' type='text/javascript'%3E%3C/script%3E""));
 </script>
 <script type=""text/javascript"" src=""{0}netbash-script-js?v={1}""></script>";
 
@@ -35,6 +36,7 @@ namespace NetBash.UI
             {  
                 "netbash",
                 "netbash-jquery-js",
+                "netbash-keymaster-js",
                 "netbash-style-css",
                 "netbash-script-js"
             };
@@ -91,6 +93,7 @@ namespace NetBash.UI
                 case "netbash-jquery-js":
                 case "netbash-script-js":
                 case "netbash-style-css":
+                case "netbash-keymaster-js":
                     output = Includes(context, path);
                     break;
 

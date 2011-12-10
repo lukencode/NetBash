@@ -37,7 +37,7 @@
     this.scrollBottom = function () {
         //finish loading
         clearTimeout(showLoader);
-        $("#console-input").removeClass("loading"); 
+        $("#console-input").removeClass("loading");
 
         $("#console-result").prop({ scrollTop: $("#console-result").prop("scrollHeight") });
     };
@@ -127,16 +127,22 @@
 
         //enter press
         $("#console-input input").keyup(function (event) {
-            if (event.which == 13) {
+            if (event.which == 13) { //enter
                 event.preventDefault();
 
                 var text = $("#console-input input").val();
                 lastCommand = text;
 
-                if (text.length)
+                if (text.length) {
                     sendCommand(text);
-            } else if (event.which == 38) {
+                } else {
+                    openConsole();
+                }
+            } else if (event.which == 38) { //up
                 $("#console-input input").val(lastCommand);
+            } else if (event.which == 27) { //escape
+                closeConsole();
+                $("#console-input input").blur();
             }
         });
 
@@ -145,6 +151,18 @@
             if (!$(event.target).closest('#netbash-wrap').length) {
                 closeConsole();
             };
+        });
+
+        //bind keyboard shortcuts
+        key('n', function () {
+            openConsole();
+            $("#console-input input").focus();
+            return false;
+        });
+
+        //bind keyboard shortcuts
+        key('esc', function () {
+            closeConsole();
         });
     });
 })(jQuery, window);
