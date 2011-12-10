@@ -4,6 +4,7 @@
     var lastCommand;
     var storageKey = "NetBash-History";
     var isOpen = false;
+    var isHidden = false;
     var showLoader;
 
     var hasLocalStorage = function () {
@@ -46,6 +47,8 @@
         if (isOpen)
             return;
 
+        $("#console-input input").focus();
+
         $("#console-result").fadeIn("fast");
         $("#netbash-wrap").animate({
             height: '500px'
@@ -64,6 +67,8 @@
         }, 100, function () {
             isOpen = false;
         });
+
+        $("#console-input input").blur();
     };
 
     this.startLoader = function () {
@@ -121,6 +126,12 @@
         var controls = $('<div id="console-result"><div class="console-message">NetBash v1.0 for me on github <a href="https://github.com/lukencode/NetBash">lukencode/NetBash</a></div></div><div id="console-input"><span>></span><input type="text" placeholder="NetBash 1.0" /></div>').appendTo(container);
     };
 
+    this.toggleConsole = function () {
+        $('#netbash-wrap').slideToggle(90, function () {
+            isHidden = $('#netbash-wrap').is(":hidden");
+        });
+    };
+
     $(function () {
         initUI();
         load();
@@ -140,9 +151,8 @@
                 }
             } else if (event.which == 38) { //up
                 $("#console-input input").val(lastCommand);
-            } else if (event.which == 27) { //escape
+            } else if (event.which == 27) { // || event.which == 192) { //escape or `
                 closeConsole();
-                $("#console-input input").blur();
             }
         });
 
@@ -154,15 +164,24 @@
         });
 
         //bind keyboard shortcuts
-        key('n', function () {
+        key('`', function () {
             openConsole();
-            $("#console-input input").focus();
+
+            if (isHidden)
+                toggleConsole();
+
             return false;
+        });
+
+        key('shift+`', function () {
+            closeConsole();
+            toggleConsole();
         });
 
         //bind keyboard shortcuts
         key('esc', function () {
             closeConsole();
         });
+
     });
 })(jQuery, window);

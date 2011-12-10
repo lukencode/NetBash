@@ -12,11 +12,11 @@ namespace NetBash.Commands
         {
             var sb = new StringBuilder();
 
-            sb.AppendFormat("{0} - {1}", "'n'".PadRight(7), "Opens and focuses NetBash");
+            sb.AppendFormat("{0} - {1}", "`".PadRight(7), "Opens and focuses NetBash");
             sb.AppendLine();
-            sb.AppendFormat("{0} - {1}", "'esc'".PadRight(7), "Closes NetBash");
+            sb.AppendFormat("{0} - {1}", "esc".PadRight(7), "Closes NetBash");
             sb.AppendLine();
-            sb.AppendFormat("{0} - {1}", "'↑'".PadRight(7), "Puts last command in text box (only when focuses)");
+            sb.AppendFormat("{0} - {1}", "↑".PadRight(7), "Puts last command in text box (only when focuses)");
 
             return sb.ToString();
         }
