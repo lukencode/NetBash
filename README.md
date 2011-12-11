@@ -26,7 +26,6 @@ NetBash commands are sent using this format - "[command name] [arg1] [arg2] etc"
 #### Creating a Command
 NetBash will look for any implementation of the interface IWebCommand with a WebCommand attribute on first request. To create a command simply implement IWebCommand and add the WebCommand Attribtue.
 
-eg.
 ```csharp
 [WebCommand("length", "Returns number of characters in given arguments")]
 public class LengthCommand : IWebCommand
