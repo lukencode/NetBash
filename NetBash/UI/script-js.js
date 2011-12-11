@@ -6,6 +6,7 @@
     var isOpen = false;
     var isHidden = false;
     var showLoader;
+    var existingHtml;
 
     var hasLocalStorage = function () {
         try {
@@ -22,6 +23,7 @@
 
     var load = function () {
         if (!hasLocalStorage()) { return; }
+
         var html = localStorage[storageKey];
         $("#console-result").html(html);
     };
@@ -122,7 +124,14 @@
     };
 
     this.initUI = function () {
-        var container = $('<div id="netbash-wrap"/>').appendTo('body');
+        var container = null;
+
+        if (isHidden) {
+            container = $('<div id="netbash-wrap" style="display:none;"/>').appendTo('body');
+        } else {
+            container = $('<div id="netbash-wrap"/>').appendTo('body');
+        }
+
         var controls = $('<div id="console-result"><div class="console-message">NetBash v1.0 for me on github <a href="https://github.com/lukencode/NetBash">lukencode/NetBash</a></div></div><div id="console-input"><span>></span><input type="text" placeholder="NetBash 1.0" /></div>').appendTo(container);
     };
 
