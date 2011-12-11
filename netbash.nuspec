@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>NetBash</id>
+    <version>1.0</version>
+    <authors>Luke Lowrey</authors>
+    <owners>Luke Lowrey</owners>
+    <projectUrl>https://github.com/lukencode/NetBash</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description></description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2011</copyright>
+    <tags>console</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" />
+    </dependencies>
+  </metadata>
+</package>

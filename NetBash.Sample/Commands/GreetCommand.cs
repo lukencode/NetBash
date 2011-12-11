@@ -8,7 +8,7 @@ using System.IO;
 
 namespace NetBash.Sample.Commands
 {
-    //implemented example from http://tirania.org/blog/archive/2008/Oct-14.html
+    //implemented example from http://tirania.org/blog/archive/2008/Oct-14.html using NDesk.Options
 
     [WebCommand("greet", "Usage: greet [OPTIONS]+ message")]
     public class GreetCommand : IWebCommand
