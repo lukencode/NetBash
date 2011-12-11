@@ -22,7 +22,7 @@ protected void Application_Start()
 You also need to add the render includes code somewhere on your page (_Layout.cshtml is proabably easiest).
 
 ```
-@NetBash.NetBash.RenderIncludes()
+@NetBash.RenderIncludes()
 ```
 	
 #### Usage
