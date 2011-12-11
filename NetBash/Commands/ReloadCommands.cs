@@ -8,7 +8,12 @@ namespace NetBash.Commands
     [WebCommand("load-commands", "Reloads command assemblies")]
     public class ReloadCommands : IWebCommand
     {
-        public string Process(string commandText)
+        public bool ReturnHtml
+        {
+            get { return false; }
+        }
+
+        public string Process(string[] args)
         {
             NetBash.Current.LoadCommands();
             return "Commands loaded, type 'help' to see them";

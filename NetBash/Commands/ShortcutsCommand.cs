@@ -8,7 +8,12 @@ namespace NetBash.Commands
     [WebCommand("shortcuts", "Displays keyboard shortcuts")]
     public class ShortcutsCommand : IWebCommand
     {
-        public string Process(string commandText)
+        public bool ReturnHtml
+        {
+            get { return false; }
+        }
+
+        public string Process(string[] args)
         {
             var sb = new StringBuilder();
 

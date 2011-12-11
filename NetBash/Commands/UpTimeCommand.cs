@@ -9,7 +9,12 @@ namespace NetBash.Commands
     [WebCommand("uptime", "Display server uptime")]
     public class UpTimeCommand : IWebCommand
     {
-        public string Process(string commandText)
+        public bool ReturnHtml
+        {
+            get { return false; }
+        }
+
+        public string Process(string[] args)
         {
             return UpTime.ToReadableString();
         }

@@ -36,7 +36,7 @@ namespace NetBash.Sample
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            NetBash.Current.Init();
+            NetBash.Init();
             NetBash.Settings.Authorize = (request) =>
                 {
                     return request.IsLocal;

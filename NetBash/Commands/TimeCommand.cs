@@ -8,7 +8,12 @@ namespace NetBash.Commands
     [WebCommand("time", "Displays server time")]
     public class TimeCommand : IWebCommand
     {
-        public string Process(string commandText)
+        public bool ReturnHtml
+        {
+            get { return false; }
+        }
+
+        public string Process(string[] args)
         {
             return DateTime.Now.ToString();
         }

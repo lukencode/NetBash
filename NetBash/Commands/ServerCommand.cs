@@ -9,7 +9,12 @@ namespace NetBash.Commands
     [WebCommand("server", "Displays server info")]
     public class ServerCommand : IWebCommand
     {
-        public string Process(string commandText)
+        public bool ReturnHtml
+        {
+            get { return false; }
+        }
+
+        public string Process(string[] args)
         {
             var sb = new StringBuilder();
             var context = HttpContext.Current;

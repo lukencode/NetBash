@@ -116,10 +116,13 @@ namespace NetBash.UI
 
             var commandResponse = "";
             var success = true;
+            var isHtml = true;
 
             try
             {
-                commandResponse = NetBash.Current.Process(context.Request.Params["Command"]);
+                var result = NetBash.Current.Process(context.Request.Params["Command"]);
+                commandResponse = result.Result;
+                isHtml = result.IsHtml;
             }
             catch (Exception ex)
             {
@@ -127,7 +130,7 @@ namespace NetBash.UI
                 commandResponse = ex.Message;
             }
 
-            var response = new { Success = success, IsRaw = true, Content = commandResponse };
+            var response = new { Success = success, IsHtml = isHtml, Content = commandResponse };
 
             context.Response.ContentType = "application/json";
             return JsonConvert.SerializeObject(response);

@@ -7,6 +7,7 @@ using System.Web;
 using NetBash.UI;
 using System.Reflection;
 using System.Web.Compilation;
+using NetBash.Helpers;
 
 namespace NetBash
 {
@@ -16,7 +17,7 @@ namespace NetBash
         private static Type _attributeType = typeof(WebCommandAttribute);
         private static Type _interfaceType = typeof(IWebCommand);
 
-        public void Init()
+        public static void Init()
         {
             NetBashHandler.RegisterRoutes();
         }
@@ -46,7 +47,7 @@ namespace NetBash
                 throw new ApplicationException("No commands found");
         }
 
-        public string Process(string commandText)
+        internal CommandResult Process(string commandText)
         {
             if (_commandTypes == null || !_commandTypes.Any())
                 LoadCommands();
@@ -54,7 +55,7 @@ namespace NetBash
             if (string.IsNullOrWhiteSpace(commandText))
                 throw new ArgumentNullException("Command text cannot be empty");
 
-            var split = commandText.Split(' ');
+            var split = commandText.SplitCommandLine();
             var command = (split.FirstOrDefault() ?? commandText).ToLower();
 
             if (command == "help")
@@ -70,10 +71,14 @@ namespace NetBash
                 throw new ArgumentException(string.Format("Command '{0}' not found", command.ToUpper()));
 
             var webCommand = (IWebCommand)Activator.CreateInstance(commandType);
-            return webCommand.Process(string.Join(" ", split.Skip(1)));
+
+            var result = new CommandResult() { IsHtml = webCommand.ReturnHtml };
+            result.Result = webCommand.Process(split.Skip(1).ToArray());
+
+            return result;
         }
 
-        private string renderHelp()
+        private CommandResult renderHelp()
         {
             var sb = new StringBuilder();
 
@@ -89,7 +94,7 @@ namespace NetBash
                 sb.AppendLine(string.Format("{0} - {1}", attr.Name.ToUpper().PadRight(15, ' '), attr.Description));
             }
 
-            return sb.ToString();
+            return new CommandResult { Result = sb.ToString(), IsHtml = false };
         }
 
         public static IHtmlString RenderIncludes()

@@ -8,9 +8,14 @@ namespace NetBash.Sample.Commands
     [WebCommand("length", "counts chars in string")]
     public class LengthCommand : IWebCommand
     {
-        public string Process(string commandText)
+        public bool ReturnHtml
         {
-            return commandText.Length.ToString();
+            get { return false; }
+        }
+
+        public string Process(string[] args)
+        {
+            return string.Join(" ", args).Length.ToString();
         }
     }
 }

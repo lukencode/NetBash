@@ -46,11 +46,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyLocator.cs" />
+    <Compile Include="CommandResult.cs" />
     <Compile Include="Commands\ReloadCommands.cs" />
     <Compile Include="Commands\ServerCommand.cs" />
     <Compile Include="Commands\ShortcutsCommand.cs" />
     <Compile Include="Commands\TimeCommand.cs" />
     <Compile Include="Commands\UpTimeCommand.cs" />
+    <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="IWebCommand.cs" />
     <Compile Include="NetBash.cs" />
     <Compile Include="NetBash.Settings.cs" />

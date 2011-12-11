@@ -5,9 +5,9 @@ using System.Text;
 
 namespace NetBash
 {
-    public interface IWebCommand
+    internal class CommandResult
     {
-        string Process(string[] args);
-        bool ReturnHtml { get; }
+        public string Result { get; set; }
+        public bool IsHtml { get; set; }
     }
 }

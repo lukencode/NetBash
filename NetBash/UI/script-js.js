@@ -99,12 +99,12 @@
 
                 success: function (data) {
                     if (data.Success === true) {
-                        if (data.IsRaw) {
-                            //pre that shit
-                            $('<pre class="console-response"/>').html(data.Content).appendTo('#console-result');
-                        } else {
+                        if (data.IsHtml) {
                             //regs div bro
                             $('<div class="console-response"/>').html(data.Content).appendTo('#console-result');
+                        } else {
+                            //pre that shit
+                            $('<pre class="console-response"/>').html(data.Content).appendTo('#console-result');
                         }
                     } else {
                         setError(data.Content);

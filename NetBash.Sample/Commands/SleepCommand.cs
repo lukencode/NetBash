@@ -9,11 +9,17 @@ namespace NetBash.Sample.Commands
     [WebCommand("sleep", "Sleeps for given amount of time")]
     public class SleepCommand : IWebCommand
     {
-        public string Process(string commandText)
+        public bool ReturnHtml
+        {
+            get { return false; }
+        }
+
+        public string Process(string[] args)
         {
             int sleeptime = 1000;
 
-            int.TryParse(commandText.Trim(), out sleeptime);
+            if(args.Any())
+                int.TryParse(args[0].Trim(), out sleeptime);
 
             Thread.Sleep(sleeptime);
 
