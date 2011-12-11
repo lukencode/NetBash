@@ -18,6 +18,12 @@ protected void Application_Start()
 		};
 }
 ```
+
+You also need to add the render includes code somewhere on your page (_Layout.cshtml is proabably easiest).
+
+```
+@NetBash.NetBash.RenderIncludes()
+```
 	
 #### Usage
 NetBash commands are sent using this format - "[command name] [arg1] [arg2] etc". You can see which commands are currently loaded by typing "help". There are also a few keyboard shortcuts (which can be viewed with "shortcuts" the most useful being "`" to open and focust the console.
