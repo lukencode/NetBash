@@ -3,6 +3,7 @@ function NetBash($, window, welcomeMessage, version) {
     var self = this;
     var lastCommand;
     var storageKey = "NetBash-History";
+    var hiddenKey = "NetBash-Hidden";
     var isOpen = false;
     var isHidden = false;
     var showLoader;
@@ -24,8 +25,12 @@ function NetBash($, window, welcomeMessage, version) {
     var load = function () {
         if (!hasLocalStorage()) { return; }
 
-        var html = localStorage[storageKey];
-        $("#console-result").html(html);
+        existingHtml = localStorage[storageKey];
+        //$("#console-result").html(html);
+
+        var localStorageHidden = localStorage[hiddenKey];
+        if (localStorageHidden != null)
+            isHidden = (localStorageHidden == 'true');
     };
 
     var clearStorage = function () {
@@ -133,17 +138,22 @@ function NetBash($, window, welcomeMessage, version) {
         }
 
         var controls = $('<div id="console-result"><div class="console-message">' + welcomeMessage + '</div></div><div id="console-input"><span>></span><input type="text" placeholder="NetBash ' + version + ' " /></div>').appendTo(container);
+
+        if (existingHtml) {
+            $("#console-result").html(existingHtml);
+        }
     };
 
     this.toggleConsole = function () {
         $('#netbash-wrap').slideToggle(90, function () {
             isHidden = $('#netbash-wrap').is(":hidden");
+            localStorage[hiddenKey] = isHidden;
         });
     };
 
     $(function () {
-        self.initUI();
         load();
+        self.initUI();
 
         //enter press
         $("#console-input input").keyup(function (event) {

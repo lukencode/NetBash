@@ -64,6 +64,7 @@
     <EmbeddedResource Include="UI\style-css.css" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\App_Start\NetBashStart.cs.pp" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
