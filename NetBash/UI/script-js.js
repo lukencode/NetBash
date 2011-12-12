@@ -1,6 +1,6 @@
 ﻿
-(function ($, window) {
-
+function NetBash($, window, welcomeMessage) {
+    var self = this;
     var lastCommand;
     var storageKey = "NetBash-History";
     var isOpen = false;
@@ -78,18 +78,18 @@
     };
 
     this.sendCommand = function (text) {
-        openConsole();
+        self.openConsole();
         $("#console-input input").val("");
 
         $('<div class="console-request"/>').html(text).appendTo('#console-result');
-        scrollBottom();
+        self.scrollBottom();
 
         //clear command
         if (text == "clear") {
             $("#console-result").html("");
             clearStorage();
         } else {
-            startLoader();
+            self.startLoader();
 
             //send command
             $.ajax({
@@ -107,16 +107,16 @@
                             $('<pre class="console-response"/>').html(data.Content).appendTo('#console-result');
                         }
                     } else {
-                        setError(data.Content);
+                        self.setError(data.Content);
                     }
 
-                    scrollBottom();
+                    self.scrollBottom();
                     save();
                 },
 
                 error: function (xhr, ajaxOptions, thrownError) {
-                    setError(thrownError.toString());
-                    scrollBottom();
+                    self.setError(thrownError.toString());
+                    self.scrollBottom();
                     save();
                 }
             });
@@ -132,7 +132,7 @@
             container = $('<div id="netbash-wrap"/>').appendTo('body');
         }
 
-        var controls = $('<div id="console-result"><div class="console-message">NetBash v1.0 for me on github <a href="https://github.com/lukencode/NetBash">lukencode/NetBash</a></div></div><div id="console-input"><span>></span><input type="text" placeholder="NetBash 1.0" /></div>').appendTo(container);
+        var controls = $('<div id="console-result"><div class="console-message">' + welcomeMessage + '</div></div><div id="console-input"><span>></span><input type="text" placeholder="NetBash 1.0" /></div>').appendTo(container);
     };
 
     this.toggleConsole = function () {
@@ -142,7 +142,7 @@
     };
 
     $(function () {
-        initUI();
+        self.initUI();
         load();
 
         //enter press
@@ -154,17 +154,17 @@
                 lastCommand = text;
 
                 if (text.length) {
-                    sendCommand(text);
+                    self.sendCommand(text);
                 } else {
-                    openConsole();
+                    self.openConsole();
                 }
             } else if (event.which == 38) { //up
                 $("#console-input input").val(lastCommand);
             } else if (event.which == 27) { // || event.which == 192) { //escape or `
-                closeConsole();
+                self.closeConsole();
             } else if (event.which == 192 && $("#console-input input").val().indexOf("~") != -1) {
-                closeConsole();
-                toggleConsole();
+                self.closeConsole();
+                self.toggleConsole();
                 $("#console-input input").val("");
             }
         });
@@ -172,29 +172,29 @@
         //close
         $('html').click(function (event) {
             if (!$(event.target).closest('#netbash-wrap').length) {
-                closeConsole();
+                self.closeConsole();
             };
         });
 
         //bind keyboard shortcuts
         key('`', function () {
-            openConsole();
+            self.openConsole();
 
             if (isHidden)
-                toggleConsole();
+                self.toggleConsole();
 
             return false;
         });
 
         key('shift+`', function () {
-            closeConsole();
-            toggleConsole();
+            self.closeConsole();
+            self.toggleConsole();
         });
 
         //bind keyboard shortcuts
         key('esc', function () {
-            closeConsole();
+            self.closeConsole();
         });
 
     });
-})(jQuery, window);
+}

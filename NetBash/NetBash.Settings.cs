@@ -18,6 +18,8 @@ namespace NetBash
             public static string Version { get; private set; }
             public static Func<HttpRequest, bool> Authorize { get; set; }
 
+            public static string WelcomeMessage = "<strong><a href=\"http://github.com/lukencode/NetBash\" target=\"_blank\">NetBash 0.11</a></strong> - Type \"help\" to list commands";
+
             static Settings()
             {
                 byte[] contents = System.IO.File.ReadAllBytes(typeof(Settings).Assembly.Location);
