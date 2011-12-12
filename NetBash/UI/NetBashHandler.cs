@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Routing;
-using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 
 namespace NetBash.UI
 {
@@ -133,7 +134,12 @@ namespace NetBash.UI
             var response = new { Success = success, IsHtml = isHtml, Content = commandResponse };
 
             context.Response.ContentType = "application/json";
-            return JsonConvert.SerializeObject(response);
+
+            var sb = new StringBuilder();
+            var serializer = new JavaScriptSerializer();
+            serializer.Serialize(response, sb);
+
+            return sb.ToString();
         }
 
         /// <summary>
