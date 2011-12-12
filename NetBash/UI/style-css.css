@@ -97,8 +97,18 @@ pre.console-response
     color:#fff;
 }
         
-.console-request a
+#netbash-wrap a
 {
     color:Blue;
     text-decoration:underline;
+}
+
+#netbash-wrap a:hover
+{
+    color:Aqua;
+}
+
+#netbash-wrap a:visited
+{
+    color:Blue;
 }

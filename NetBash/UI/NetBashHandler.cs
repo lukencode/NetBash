@@ -24,10 +24,10 @@ namespace NetBash.UI
     if(!window.key) document.write(unescape(""%3Cscript src='{0}netbash-keymaster-js' type='text/javascript'%3E%3C/script%3E""));
 </script>
 <script type=""text/javascript"" src=""{0}netbash-script-js?v={1}""></script>
-<script type=""text/javascript"">var netbash = new NetBash(jQuery, window, '{2}');</script>";
+<script type=""text/javascript"">var netbash = new NetBash(jQuery, window, '{2}', {3});</script>";
 
             var result = "";
-            result = string.Format(format, ensureTrailingSlash(VirtualPathUtility.ToAbsolute(NetBash.Settings.RouteBasePath)), NetBash.Settings.Version, NetBash.Settings.WelcomeMessage);
+            result = string.Format(format, ensureTrailingSlash(VirtualPathUtility.ToAbsolute(NetBash.Settings.RouteBasePath)), NetBash.Settings.Hash, NetBash.Settings.WelcomeMessage, NetBash.Settings.Version);
 
             return new HtmlString(result);
         }

@@ -1,5 +1,5 @@
 ﻿
-function NetBash($, window, welcomeMessage) {
+function NetBash($, window, welcomeMessage, version) {
     var self = this;
     var lastCommand;
     var storageKey = "NetBash-History";
@@ -132,7 +132,7 @@ function NetBash($, window, welcomeMessage) {
             container = $('<div id="netbash-wrap"/>').appendTo('body');
         }
 
-        var controls = $('<div id="console-result"><div class="console-message">' + welcomeMessage + '</div></div><div id="console-input"><span>></span><input type="text" placeholder="NetBash 1.0" /></div>').appendTo(container);
+        var controls = $('<div id="console-result"><div class="console-message">' + welcomeMessage + '</div></div><div id="console-input"><span>></span><input type="text" placeholder="NetBash ' + version + ' " /></div>').appendTo(container);
     };
 
     this.toggleConsole = function () {
