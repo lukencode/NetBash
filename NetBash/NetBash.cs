@@ -53,7 +53,7 @@ namespace NetBash
                 LoadCommands();
 
             if (string.IsNullOrWhiteSpace(commandText))
-                throw new ArgumentNullException("Command text cannot be empty");
+                throw new ArgumentNullException("commandText", "Command text cannot be empty");
 
             var split = commandText.SplitCommandLine();
             var command = (split.FirstOrDefault() ?? commandText).ToLower();

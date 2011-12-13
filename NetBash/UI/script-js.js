@@ -1,5 +1,8 @@
 ﻿
-function NetBash($, window, welcomeMessage, version) {
+function NetBash($, window, opt) {
+
+    var options = opt || {};
+
     var self = this;
     var lastCommand;
     var storageKey = "NetBash-History";
@@ -98,7 +101,7 @@ function NetBash($, window, welcomeMessage, version) {
 
             //send command
             $.ajax({
-                url: '/netbash',
+                url: 'netbash',
                 dataType: 'json',
                 data: { Command: text },
 
@@ -137,7 +140,7 @@ function NetBash($, window, welcomeMessage, version) {
             container = $('<div id="netbash-wrap"/>').appendTo('body');
         }
 
-        var controls = $('<div id="console-result"><div class="console-message">' + welcomeMessage + '</div></div><div id="console-input"><span>></span><input type="text" placeholder="NetBash ' + version + ' " /></div>').appendTo(container);
+        var controls = $('<div id="console-result"><div class="console-message">' + options.welcomeMessage + '</div></div><div id="console-input"><span>></span><input type="text" placeholder="NetBash ' + options.version + ' " /></div>').appendTo(container);
 
         if (existingHtml) {
             $("#console-result").html(existingHtml);
