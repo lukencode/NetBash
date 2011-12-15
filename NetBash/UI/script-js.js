@@ -7,6 +7,7 @@ function NetBash($, window, opt) {
     var lastCommand;
     var storageKey = "NetBash-History";
     var hiddenKey = "NetBash-Hidden";
+    var commandKey = "NetBash-LastCommand";
     var isOpen = false;
     var isHidden = (options.isHidden === true);
     var showLoader;
@@ -23,17 +24,20 @@ function NetBash($, window, opt) {
     var save = function () {
         if (!hasLocalStorage()) { return; }
         localStorage[storageKey] = $("#console-result").html();
+        localStorage[hiddenKey] = isHidden;
+        localStorage[commandKey] = lastCommand;
     };
 
     var load = function () {
         if (!hasLocalStorage()) { return; }
 
         existingHtml = localStorage[storageKey];
-        //$("#console-result").html(html);
 
         var localStorageHidden = localStorage[hiddenKey];
         if (localStorageHidden != null)
             isHidden = (localStorageHidden == 'true');
+
+        lastCommand = localStorage[commandKey];
     };
 
     var clearStorage = function () {
