@@ -42,7 +42,7 @@ function NetBash($, window, opt) {
     };
 
     this.setError = function (message) {
-        $('<div class="console-response error"/>').html(message).appendTo('#console-result');
+        $('<div class="console-error"/>').html(message).appendTo('#console-result');
     };
 
     this.scrollBottom = function () {

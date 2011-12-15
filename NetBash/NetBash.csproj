@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\App_Start\NetBashStart.cs.pp" />
+    <None Include="UI\style.less" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\jquery-js.js" />
@@ -72,7 +73,13 @@
   <ItemGroup>
     <EmbeddedResource Include="UI\keymaster-js.js" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\dotless.Compiler.exe" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>"$(ProjectDir)lib\dotless.Compiler.exe" -m "$(ProjectDir)UI\style.less" "$(ProjectDir)UI\style-css.css"</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
