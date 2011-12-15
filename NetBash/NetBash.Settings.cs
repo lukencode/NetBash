@@ -19,6 +19,7 @@ namespace NetBash
             public static string Hash { get; private set; }
             public static string Version { get; private set; }
             public static string WelcomeMessage { get; set; }
+            public static bool HiddenByDefault { get; set; }
             public static Func<HttpRequest, bool> Authorize { get; set; }
 
             static Settings()
@@ -34,6 +35,8 @@ namespace NetBash
                 WelcomeMessage = string.Format("<strong><a href=\"http://github.com/lukencode/NetBash\" target=\"_blank\">NetBash {0}</a></strong> - Type \"help\" to list commands", Version);
 
                 RouteBasePath = "~/";
+
+                HiddenByDefault = false;
             }
         }
     }

@@ -42,6 +42,8 @@ namespace NetBash.Sample
                 {
                     return request.IsLocal;
                 };
+
+            //NetBash.Settings.HiddenByDefault = true;
         }
     }
 }

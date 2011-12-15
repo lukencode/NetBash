@@ -8,7 +8,7 @@ function NetBash($, window, opt) {
     var storageKey = "NetBash-History";
     var hiddenKey = "NetBash-Hidden";
     var isOpen = false;
-    var isHidden = false;
+    var isHidden = (options.isHidden === true);
     var showLoader;
     var existingHtml;
 
