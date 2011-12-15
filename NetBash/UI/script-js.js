@@ -101,7 +101,7 @@ function NetBash($, window, opt) {
 
             //send command
             $.ajax({
-                url: 'netbash',
+                url: options.routeBasePath + 'netbash',
                 dataType: 'json',
                 data: { Command: text },
 
