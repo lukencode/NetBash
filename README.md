@@ -50,3 +50,7 @@ public class LengthCommand : IWebCommand
 
 This silly example just returns the number of chars in the arguments you pass. The first parameter of WebCommand is the name you use to invoke the command, the second is the description that shows up in help.
 
+#### Commands
+
+Over on the wiki is a list of commands people have made - https://github.com/lukencode/NetBash/wiki/Commands
+
