@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NetBash.Formatting
 {
-    public static class Extensions
+    public static class TableExtensions
     {
         public static string ToConsoleTable<T>(this IEnumerable<T> data)
         {
