@@ -128,7 +128,16 @@ namespace NetBash.UI
             try
             {
                 var result = NetBash.Current.Process(context.Request.Params["Command"]);
-                commandResponse = result.Result;
+                if (result.IsHtml)
+                {
+                    //on your way
+                    commandResponse = result.Result;
+                }
+                else
+                {
+                    //encode it
+                    commandResponse = context.Server.HtmlEncode(result.Result);
+                }
                 isHtml = result.IsHtml;
             }
             catch (Exception ex)
