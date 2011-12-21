@@ -136,7 +136,7 @@ namespace NetBash.UI
                 else
                 {
                     //encode it
-                    commandResponse = context.Server.HtmlEncode(result.Result);
+                    commandResponse = HttpUtility.HtmlEncode(result.Result);
                 }
                 isHtml = result.IsHtml;
             }
