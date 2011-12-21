@@ -49,6 +49,7 @@
     <Compile Include="Commands\ShortcutsCommand.cs" />
     <Compile Include="Commands\TimeCommand.cs" />
     <Compile Include="Commands\UpTimeCommand.cs" />
+    <Compile Include="Formatting\TableExtensions.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="IWebCommand.cs" />
     <Compile Include="NetBash.cs" />

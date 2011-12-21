@@ -65,6 +65,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\GridCommand.cs" />
     <Compile Include="Commands\GreetCommand.cs">
       <SubType>Code</SubType>
     </Compile>
