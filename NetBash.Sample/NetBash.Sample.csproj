@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="Commands\LengthCommand.cs" />
     <Compile Include="Commands\SleepCommand.cs" />
+    <Compile Include="Commands\SparkCommand.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">

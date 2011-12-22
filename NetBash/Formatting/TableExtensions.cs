@@ -31,27 +31,28 @@ namespace NetBash.Formatting
             foreach (var prop in properties)
             {
                 var max = data.Max(row => prop.GetValue(row, null).ToString().Length);
+
                 if (prop.Name.Length > max)
-                {
                     max = prop.Name.Length;
-                }
+
                 //Add some space
-                max += 1;
-                columnWidths.Add(prop.Name, max);
+                columnWidths.Add(prop.Name, max + 3);
             }
 
             foreach (var prop in properties)
             {
-                sb.AppendFormat("{0,-" + columnWidths[prop.Name] + "}", prop.Name);
+                sb.AppendFormat("{0,-" + columnWidths[prop.Name] + "}", prop.Name.ToUpper());
             }
 
             //Bust out a linebreak after the headers
             sb.AppendLine();
+
             //Another dashed linebreak
             for (int i = 0; i < columnWidths.Sum(c => c.Value); i++)
             {
                 sb.Append("-");
             }
+
             sb.AppendLine();
 
             foreach (var row in data)
@@ -60,13 +61,16 @@ namespace NetBash.Formatting
                 {
                     sb.AppendFormat("{0,-" + columnWidths[prop.Name] + "}", prop.GetValue(row, null));
                 }
+
                 sb.AppendLine();
             }
+
             //Another dashed linebreak
             for (int i = 0; i < columnWidths.Sum(c => c.Value); i++)
             {
                 sb.Append("-");
             }
+
             sb.AppendLine();
 
             return sb.ToString();
