@@ -54,7 +54,7 @@ function NetBash($, window, opt) {
         clearTimeout(showLoader);
         $("#console-input").removeClass("loading");
 
-        $("#console-result").prop({ scrollTop: $("#console-result").prop("scrollHeight") });
+        $("#console-result").scrollTop($("#console-result").attr("scrollHeight"));
     };
 
     this.openConsole = function () {
