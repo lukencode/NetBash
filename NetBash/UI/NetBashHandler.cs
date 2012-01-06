@@ -21,6 +21,7 @@ namespace NetBash.UI
 @"<link rel=""stylesheet"" type=""text/css"" href=""{0}netbash-style-css?v={1}"">
 <script type=""text/javascript"">
     if (!window.jQuery) document.write(unescape(""%3Cscript src='{0}netbash-jquery-js' type='text/javascript'%3E%3C/script%3E""));
+    if (!($(document).prop)) alert('NetBash requires jQuery v1.6 or above, please upgrade.');
     if(!window.key) document.write(unescape(""%3Cscript src='{0}netbash-keymaster-js' type='text/javascript'%3E%3C/script%3E""));
 </script>
 <script type=""text/javascript"" src=""{0}netbash-script-js?v={1}""></script>
