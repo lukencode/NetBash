@@ -54,7 +54,7 @@ function NetBash($, window, opt) {
         clearTimeout(showLoader);
         $("#console-input").removeClass("loading");
 
-        $("#console-result").scrollTop($("#console-result").attr("scrollHeight"));
+        $("#console-result").scrollTop($("#console-result")[0].scrollHeight);
     };
 
     this.openConsole = function () {
@@ -69,6 +69,7 @@ function NetBash($, window, opt) {
         }, 100, function () {
             isOpen = true;
         });
+        self.scrollBottom();
     };
 
     this.closeConsole = function () {
@@ -116,7 +117,7 @@ function NetBash($, window, opt) {
                             $('<div class="console-response"/>').html(data.Content).appendTo('#console-result');
                         } else {
                             //pre that shit
-                            $('<pre class="console-response"/>').html(data.Content).appendTo('#console-result');
+                            $('<pre class="console-response">' + data.Content + '</pre>').appendTo('#console-result');
                         }
                     } else {
                         self.setError(data.Content);
