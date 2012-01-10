@@ -117,7 +117,7 @@ function NetBash($, window, opt) {
                             $('<div class="console-response"/>').html(data.Content).appendTo('#console-result');
                         } else {
                             //pre that shit
-                            $('<pre class="console-response"/>').html(data.Content).appendTo('#console-result');
+                            $('<pre class="console-response">' + data.Content + '</pre>').appendTo('#console-result');
                         }
                     } else {
                         self.setError(data.Content);
