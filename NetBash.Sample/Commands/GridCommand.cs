@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using NDesk.Options;
 using System.Text;
 using System.IO;
 using NetBash.Formatting;
 
 namespace NetBash.Sample.Commands
 {
-    //implemented example from http://tirania.org/blog/archive/2008/Oct-14.html using NDesk.Options
-
     [WebCommand("grid", "Usage: grid")]
     public class GridCommand : IWebCommand
     {

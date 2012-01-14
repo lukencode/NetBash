@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace NetBash.Formatting
 {
@@ -9,31 +10,39 @@ namespace NetBash.Formatting
     {
         public static string ToConsoleTable<T>(this IEnumerable<T> data)
         {
+            var type = typeof(T);
+            var isEmpty = data == null || !data.Any();
+
             //Lets start with a string builder
             var sb = new StringBuilder();
 
             //If its a list of primatives just output them straight up, yo
-            if (typeof(T).IsPrimitive || typeof(String) == typeof(T) || typeof(Decimal) == typeof(T))
+            if (type.IsPrimitive || typeof(String) == type || typeof(Decimal) == type)
             {
                 foreach (var row in data)
                 {
                     sb.Append(row.ToString());
                 }
+
                 return sb.ToString();
             }
             
             //Headers
-            //TODO - Something that reads the class directly instead of the first item (So empty lists dont crash)
-            var properties = data.First().GetType().GetProperties();
+            var properties = type.GetProperties();
 
             //get the column widths
             var columnWidths = new Dictionary<string,int>();
             foreach (var prop in properties)
             {
-                var max = data.Max(row => prop.GetValue(row, null).ToString().Length);
+                var max = prop.Name.Length;
 
-                if (prop.Name.Length > max)
-                    max = prop.Name.Length;
+                if (!isEmpty)
+                {
+                    max = data.Max(row => prop.GetValue(row, null).ToString().Length);
+
+                    if (prop.Name.Length > max)
+                        max = prop.Name.Length;
+                }
 
                 //Add some space
                 columnWidths.Add(prop.Name, max + 3);
@@ -54,15 +63,22 @@ namespace NetBash.Formatting
             }
 
             sb.AppendLine();
-
-            foreach (var row in data)
+            
+            if (!isEmpty)
             {
-                foreach (var prop in properties)
+                foreach (var row in data)
                 {
-                    sb.AppendFormat("{0,-" + columnWidths[prop.Name] + "}", prop.GetValue(row, null));
-                }
+                    foreach (var prop in properties)
+                    {
+                        sb.AppendFormat("{0,-" + columnWidths[prop.Name] + "}", prop.GetValue(row, null));
+                    }
 
-                sb.AppendLine();
+                    sb.AppendLine();
+                }
+            }
+            else
+            {
+                sb.AppendLine("NO RESULTS");
             }
 
             //Another dashed linebreak
