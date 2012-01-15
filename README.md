@@ -1,5 +1,7 @@
 NetBash is a drop in (think mvc mini profiler) command line for your web app.
 
+Download from NuGet - **PM> Install-Package NetBash**
+
 #### Set up
 On application start call NetBash.Init() to initilize the routes. You can optionally set the Authorize action, this action is run to determine whether to show the console.
 
