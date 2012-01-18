@@ -42,6 +42,7 @@ namespace NetBash.UI
             var urls = new[] 
             {  
                 "netbash",
+                "netbash-export",
                 "netbash-jquery-js",
                 "netbash-keymaster-js",
                 "netbash-style-css",
@@ -108,6 +109,10 @@ namespace NetBash.UI
                     output = RenderCommand(context);
                     break;
 
+                case "netbash-export":
+                    output = ExportCommand(context);
+                    break;
+
                 default:
                     output = NotFound(context);
                     break;
@@ -155,6 +160,26 @@ namespace NetBash.UI
             serializer.Serialize(response, sb);
 
             return sb.ToString();
+        }
+
+        private static string ExportCommand(HttpContext context)
+        {
+            if (NetBash.Settings.Authorize != null && !NetBash.Settings.Authorize(HttpContext.Current.Request))
+                throw new UnauthorizedAccessException();
+
+            try
+            {
+                var result = NetBash.Current.Process(context.Request.Params["Command"]);
+                context.Response.ContentType = "application/octet-stream";
+                context.Response.AddHeader(
+                    "Content-Disposition",
+                    "attachment; filename=" + (string.IsNullOrEmpty(result.FileName) ? "result.txt" : result.FileName));
+                return result.Result;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         /// <summary>

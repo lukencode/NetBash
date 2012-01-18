@@ -73,7 +73,14 @@ namespace NetBash
             var webCommand = (IWebCommand)Activator.CreateInstance(commandType);
 
             var result = new CommandResult() { IsHtml = webCommand.ReturnHtml };
-            result.Result = webCommand.Process(split.Skip(1).ToArray());
+            // Check for file redirect
+            var args = split.Skip(1).ToArray();
+            if (args.Length >= 2 && args[args.Length - 2] == ">")
+            {
+                result.FileName = args[args.Length - 1];
+                Array.Resize(ref args, args.Length - 2);
+            }
+            result.Result = webCommand.Process(args);
 
             return result;
         }
