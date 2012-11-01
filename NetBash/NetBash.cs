@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,25 +22,29 @@ namespace NetBash
             NetBashHandler.RegisterRoutes();
         }
 
+        private static Type[] TryGetTypes(Assembly assembly) 
+		{
+		    try 
+    	    {
+    	        return assembly.GetTypes();
+    	    } 
+    	    catch (ReflectionTypeLoadException) 
+    	    {
+    	        return Type.EmptyTypes;
+    	    }
+    	}
+
         internal void LoadCommands()
         {
-            try
-            {
-                _interfaceType = typeof(IWebCommand);
-                var assemblies = AssemblyLocator.GetAssemblies();
+              _interfaceType = typeof(IWebCommand);
+              var assemblies = AssemblyLocator.GetAssemblies();
 
-                var results = from a in assemblies
-                              from t in a.GetTypes()
-                              where _interfaceType.IsAssignableFrom(t)
-                              select t;
+              var results = from a in assemblies
+    	        	        from t in TryGetTypes(a)
+    	      	            where _interfaceType.IsAssignableFrom(t)
+    	         	        select t;
 
-                _commandTypes = results.ToList();
-            }
-            catch (ReflectionTypeLoadException ex)
-            {
-                var text = string.Join(", ", ex.LoaderExceptions.Select(e => e.Message));
-                throw new ApplicationException(text);
-            }
+              _commandTypes = results.ToList();
 
             //if we still cant find any throw exception
             if (_commandTypes == null || !_commandTypes.Any())
