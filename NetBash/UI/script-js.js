@@ -159,12 +159,42 @@ function NetBash($, window, opt) {
         });
     };
 
+    this.getCurPos = function (inp) {
+        if (!inp) { return 0; }
+        if (document.selection) { inp.focus(); }
+        return 'selectionStart' in inp ? inp.selectionStart : '' || Math.abs(document.selection.createRange().moveStart('character', -inp.value.length));
+    };
+
+    this.setCursorPos = function(elem, cp) {
+      if (elem.createTextRange) {
+        var range = elem.createTextRange();
+        range.move('character', cp);
+        range.select();
+      } else {
+        if (elem.selectionStart) {
+          elem.focus();
+          elem.setSelectionRange(cp, cp);
+        } else {
+          elem.focus();
+        }
+      }
+    };
+
+    this.searchRange = function(start, end, matchtxt) {
+      for (var i = start; i < end; i++) {
+        if (options.items[i].indexOf(matchtxt) == 0) {
+          return i;
+        }
+      }
+      return -1;
+    };
+
     $(function () {
         load();
         self.initUI();
 
         //enter press
-        $("#console-input input").keyup(function (event) {
+        $("#console-input input").keydown(function (event) {
             if (event.which == 13) { //enter
                 event.preventDefault();
 
@@ -184,6 +214,32 @@ function NetBash($, window, opt) {
                 self.closeConsole();
                 self.toggleConsole();
                 $("#console-input input").val("");
+            } else if (event.which == 9) {
+              event.preventDefault();
+              // get the text behind the cursor
+              var cp = self.getCurPos(this);
+              var matchtxt = this.value.substr(0, cp);
+              var txt = this.value;
+              var start = 0;
+
+              if (txt != matchtxt) {
+                for (var i = 0; i < options.items.length; i++) {
+                  if (options.items[i] == txt) {
+                    start = i + 1;
+                    break;
+                  }
+                }
+              }
+
+              var ix = self.searchRange(start, options.items.length, matchtxt);
+              if (ix == -1 && start != 0) {
+                ix = self.searchRange(0, start, matchtxt);
+              }
+
+              if (ix != -1) {
+                this.value = options.items[ix];
+                self.setCursorPos(this, cp);
+              }
             }
         });
 

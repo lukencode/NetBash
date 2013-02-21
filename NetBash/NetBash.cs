@@ -101,6 +101,28 @@ namespace NetBash
             return new CommandResult { Result = sb.ToString(), IsHtml = false };
         }
 
+        public string CommandList()
+        {
+            if (_commandTypes == null || !_commandTypes.Any())
+                LoadCommands();
+
+            var sb = new StringBuilder();
+
+            sb.Append("\"clear\"");
+
+            foreach (var t in _commandTypes)
+            {
+                var attr = (WebCommandAttribute)t.GetCustomAttributes(_attributeType, false).FirstOrDefault();
+
+                if (attr == null)
+                    continue;
+
+                sb.Append(string.Format(",\"{0}\"", attr.Name.ToLower()));
+            }
+
+            return sb.ToString();
+        }
+
         public static IHtmlString RenderIncludes()
         {
             return NetBashHandler.RenderIncludes();
