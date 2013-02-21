@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBash", "NetBash.\NetBash.csproj", "{AD552539-66F6-4FA2-8763-D76893A6DF69}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBash", "NetBash\NetBash.csproj", "{AD552539-66F6-4FA2-8763-D76893A6DF69}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBash.Sample", "NetBash.Sample\NetBash.Sample.csproj", "{774201D2-F1BA-4595-9828-204A5390395A}"
 EndProject
