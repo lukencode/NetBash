@@ -24,7 +24,7 @@ namespace NetBash.UI
     if(!window.key) document.write(unescape(""%3Cscript src='{0}netbash-keymaster-js' type='text/javascript'%3E%3C/script%3E""));
 </script>
 <script type=""text/javascript"" src=""{0}netbash-script-js?v={1}""></script>
-<script type=""text/javascript"">var netbash = new NetBash(jQuery, window, {{ welcomeMessage: '{2}', version: '{3}', isHidden: {4}, routeBasePath: '{5}' }});</script>";
+<script type=""text/javascript"">var netbash = new NetBash(jQuery, window, {{ welcomeMessage: '{2}', version: '{3}', isHidden: {4}, routeBasePath: '{5}', items: [{6}] }});</script>";
 
             var result = "";
             result = string.Format(format, 
@@ -32,7 +32,8 @@ namespace NetBash.UI
                                    NetBash.Settings.Hash, NetBash.Settings.WelcomeMessage, 
                                    NetBash.Settings.Version, 
                                    NetBash.Settings.HiddenByDefault.ToString().ToLower(), 
-                                   NetBash.Settings.RouteBasePath.Replace("~", ""));
+                                   NetBash.Settings.RouteBasePath.Replace("~", ""),
+                                   NetBash.Current.CommandList());
 
             return new HtmlString(result);
         }
