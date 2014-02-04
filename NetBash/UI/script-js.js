@@ -101,7 +101,18 @@ function NetBash($, window, opt) {
         if (text == "clear") {
             $("#console-result").html("");
             clearStorage();
-        } else {
+        } else { 
+            // Check for file redirect
+            var args = $.grep(text.split(/("[^"]*")|([^\s]+)/g), function(n) { return ($.trim(n)); });
+            if (args.length > 2 && args[args.length - 2] == ">") {
+                $('<form action="' + options.routeBasePath + 'netbash-export" method="post" style="display:none;"></form>')
+                    .append($('<input type="text" name="Command"></input>').val(text))
+                    .appendTo('body')
+                    .submit()
+                    .remove();
+                return;
+            }
+
             self.startLoader();
 
             //send command

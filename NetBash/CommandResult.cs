@@ -9,5 +9,6 @@ namespace NetBash
     {
         public string Result { get; set; }
         public bool IsHtml { get; set; }
+        public string FileName { get; set; }
     }
 }
